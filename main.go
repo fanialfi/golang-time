@@ -9,6 +9,10 @@ import (
 func main() {
 	now := time.Now()
 
+	// time.Duration
+	lat.LatEmpat()
+	fmt.Println()
+
 	// Time, Ticker, Scheduler
 	lat.LatTiga()
 
@@ -27,5 +31,5 @@ func main() {
 	time2 := time.Date(2023, 8, 26, 18, 59, 00, 00, time.Local)
 	fmt.Printf("time2 %v\n", time2)
 
-	fmt.Printf("program berjalan selama %v\n", time.Since(now))
+	fmt.Printf("program berjalan selama %v\n", time.Since(now).Round(time.Second))
 }

@@ -2,7 +2,6 @@ package lat
 
 import (
 	"fmt"
-	"os"
 	"time"
 )
 
@@ -114,7 +113,7 @@ func timer(timeout int, ch chan<- bool) {
 func watcher(timeout int, ch <-chan bool) {
 	<-ch
 	fmt.Println("\ntime out! no answer more than", timeout, "seconds")
-	os.Exit(1)
+	// os.Exit(1)
 }
 
 func LatTiga() {

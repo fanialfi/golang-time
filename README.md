@@ -314,3 +314,50 @@ func main(){
 dari 2 contoh di atas terdapat 2 statement yang fungsinya sama, yaitu mematikan ticker menggunakan `ticker.Stop()`. 
 By default channel _ticker.C_ akan menerima kiriman data setiap N duration, dimana di contoh di atas ada yang menggunakan 5 second dan 1 second. 
 Data yang di kirim ke channel _ticker.C_ berupa date-time kapan event tersebut terjadi
+
+
+## Time Duration
+
+Tipe `Time.Duration` ini merepresentasikan durasi, contohnya seperti 1 jam 11 menit dst, date denan tipe ini bisa di hasilkan dari operasi pencarian delta atau selisih dari dua buah variabel struct `time.Time` atau juga bisa kita buat sendiri.
+
+Tipe data durasi adalah `time.Duration` yang sebenarnya tipe ini merupakan tipe buatan baru dari `int64`, 
+ada beberapa _predefined_ konstanta durasi yang perlu di ketahui :
+
+- `time.Nanosecond` yang nilainya adalah `1`
+- `time.Microsecond` yang nilainya adalah `1000`, atau `1000` x `time.Nanosecond`
+- `time.Milisecond` yang nilainya adalah `1000000`, atau `1000` x `time.Microsecond`
+- `time.Second` yang nilainya adalah `1000000000`, atau `1000` x `time.Milisecond`
+- `time.Minute` yang nilainya adalah `1000000000000`, atau `1000` x `time.Second`
+- `time.Hour` yang nilainya adalah `1000000000000000`, atau `1000` x `time.Minute`
+
+dari list di atas bisa dicontohkan bahwa sebuah data dengan tipe `time.Duration` yang nilainya 1, maka artinya durasi adalah **1 nanosecond**.
+
+```go
+package main
+
+import (
+  "fmt"
+  "time"
+)
+
+func main( ){
+  start := time.Now()
+
+  time.Sleep(time.Second * 5)
+
+  duration := time.Since(start)
+
+  fmt.Println(duration)
+  fmt.Println("time elapsed in seconds",duration.Seconds())
+  fmt.Println("time elapsed in minutes",duration.Minutes())
+  fmt.Println("time elapsed in hours",duration.Hours())
+}
+```
+
+pada contoh code di atas variabel `duration` berisi lama waktu antara kapan variabel `start` di inisialisasi hingga kapan variabel `duration` ini statement nya di eksekusi. 
+
+Cara menghitung durasi bisa dengan menggunakan function `time.Since(t time.Time)`, isi parameter pada function tersebut dengan variabel bertipe `time.Time`, maka durasi antara waktu pada argument vs ketika statement `time.Since()` akan di hitung.
+
+### beberapa method `time.Duration`
+
+tipe durasi `time.Duration` memiliki beberapa mthod yang sangat berguna untuk keperluan menngambil nilai durasinya nya kedalam unit tertentu, misalnya seperti pada contoh di atas, object variabel `duration` diambil nilainya dalam satuan detik menggunakan method `Seconds()`, diambil satuan menit menggunakan method `Minutes()`, dan di ambil dalam satuan jam menggunakan method `Hours()` DLL.
